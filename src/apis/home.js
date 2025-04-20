@@ -1,8 +1,13 @@
 import httpInstance from "@/utils/http.js";
 
-export function getBannerApi() {
+export function getBannerApi(param={}) {
+    // param不传时，就是是空对象，解构时distributionSite的值就是"1"，达到设置默认值的效果
+    const {distributionSite = '1'} = param
     return httpInstance({
-        url:"home/banner"
+        url:"home/banner",
+        params:{
+            distributionSite
+        }
     })
 }
 
