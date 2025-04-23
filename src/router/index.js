@@ -5,7 +5,9 @@ import LayoutIndex from '@/views/layout/LayoutIndex.vue'
 
 import Category from "@/views/category/Category.vue";
 import Home from "@/views/home/HomeIndex.vue";
-import SubCategory from "@/views/subCategory/index.vue"
+import SubCategory from "@/views/subCategory/SubIndex.vue"
+
+import Detail from "@/views/detail/DetailIndex.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,13 +30,21 @@ const router = createRouter({
         },
         {
           path: 'category/sub/:id',
-          name: 'subCategory',
           component: SubCategory
         },
+        {
+          path: 'detail/:id',
+          component: Detail
+        }
 
       ]
     },
   ],
+  scrollBehavior() {
+    return {
+      top:0
+    }
+  }
 })
 
 export default router
