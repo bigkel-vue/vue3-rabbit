@@ -3,6 +3,7 @@
 import {getDetailApi} from "@/apis/detail.js";
 import {useRoute} from "vue-router";
 import {onMounted, ref} from "vue";
+import DetailHot from "@/views/detail/components/DetailHot.vue";
 
 const route = useRoute();
 
@@ -123,7 +124,9 @@ onMounted(() => {
                         </div>
                         <!-- 24热榜+专题推荐 -->
                         <div class="goods-aside">
+                            <DetailHot :hot-type="1"/>
 
+                            <DetailHot :hot-type="2"/>
                         </div>
                     </div>
                 </div>
