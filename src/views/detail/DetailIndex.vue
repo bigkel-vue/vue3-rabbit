@@ -5,6 +5,7 @@ import {useRoute} from "vue-router";
 import {onMounted, ref} from "vue";
 import DetailHot from "@/views/detail/components/DetailHot.vue";
 import ImageViewIndex from "@/components/imageView/ImageViewIndex.vue";
+import SkuIndex from "@/components/XtxSku/index.vue";
 
 const route = useRoute();
 
@@ -90,6 +91,7 @@ onMounted(() => {
                                 </dl>
                             </div>
                             <!-- sku组件 -->
+                            <SkuIndex :goods="goods"/>
 
                             <!-- 数据组件 -->
 
