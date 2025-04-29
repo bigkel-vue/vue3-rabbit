@@ -2,10 +2,11 @@
 
 import {ref} from "vue";
 import {useRouter} from "vue-router";
+import {ElMessage} from "element-plus";
 
 const userInfo = ref({
-    account:'',
-    password:'',
+    account:'1311111111',
+    password:'123456',
     agree:true
 })
 
@@ -17,13 +18,30 @@ const rules = ref({
         { required: true, message: '密码不能为空', trigger: 'blur' },
         { min: 6, max: 24, message: '密码长度要求6-14个字符', trigger: 'blur' }
     ],
+    agree: [
+    {
+        validator: (rule, val, callback) => {
+            // 自定义校验逻辑
+            // 勾选就通过 不勾选就不通过
+            if (val) {
+                callback()
+            } else {
+                callback(new Error('请勾选协议'))
+            }
+        }
+    }
+]
 })
+
+import {useUserStore} from "@/stores/userStore.js";
+
+const userStore = useUserStore();
 
 // 3. 获取form实例做统一校验
 const formRef = ref(null)
 const router = useRouter()
 const doLogin = () => {
-    const { account, password } = form.value
+    const { account, password } = userInfo.value
     // 调用实例方法
     formRef.value.validate(async (valid) => {
         // valid: 所有表单都通过校验  才为true
@@ -76,7 +94,7 @@ const doLogin = () => {
                                     我已同意隐私条款和服务条款
                                 </el-checkbox>
                             </el-form-item>
-                            <el-button size="large" class="subBtn">点击登录</el-button>
+                            <el-button size="large" class="subBtn" @click="doLogin">点击登录</el-button>
                         </el-form>
                     </div>
                 </div>

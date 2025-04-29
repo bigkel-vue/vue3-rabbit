@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ElMessage} from "element-plus";
 
 const httpInstance = axios.create({
     baseURL:"http://pcapi-xiaotuxian-front-devtest.itheima.net",
@@ -28,6 +29,10 @@ httpInstance.interceptors.response.use(
         return response.data;
     },
     (error) => {
+        ElMessage({
+            type: 'warning',
+            message: error.response.data.message
+        })
         // 统一处理 HTTP 错误（如 401、404、500）
         if (error.response) {
             switch (error.response.status) {
